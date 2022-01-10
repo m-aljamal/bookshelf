@@ -1,0 +1,41 @@
+"rest-client.environmentVariables": {
+    "local": {
+        "identityAuthority": "https://localhost:5000/connect/token",
+        "baseUrl": "localhost:3001"
+        "credential": "Basic dXNlcm5hbWU6c2VjcmV0",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQxMTE0NDYyLCJleHAiOjE2NDEyMDA4NjJ9.WRE8ahhk7RZJbuN_TTId1upLWBJjJWWFGVpoGWj2Tt8"
+    }
+}
+
+
+### 
+POST http://localhost:3001/auth/signup
+Content-Type: application/json
+
+{
+  "email": "mohammgftgfgfad@m.com",
+    "password": "12345678",
+    "name": "mohammad"
+}
+
+### 
+POST http://localhost:3001/auth/login
+Content-Type: application/json
+
+{
+  "email": "mohammad@m.com",
+    "password": "12345678"
+}
+
+
+###
+GET http://localhost:3001/auth/me 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQxMzEzMTI2LCJleHAiOjE2NDEzOTk1MjZ9.lgxhaiRr16xcz93WTaJxd4ujvbdP1C103GX3hECmdo0  
+
+### 
+POST http://localhost:3001/auth/book-list
+Content-Type: application/json
+
+{
+"bookId":3
+}

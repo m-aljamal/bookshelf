@@ -1,0 +1,16 @@
+### 
+POST http://localhost:3001/list-items
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQxODI4MDEzLCJleHAiOjE2NDE5MTQ0MTN9.b5HdscTZdstAlg0kDgNHaZPE8BJyG1No_oVuSD_lY4g
+
+{
+    
+    "bookId": 3
+}
+
+###
+GET http://localhost:3001/list-items
+
+### 
+GET http://localhost:3001/list-items/user 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQxODI4MDEzLCJleHAiOjE2NDE5MTQ0MTN9.b5HdscTZdstAlg0kDgNHaZPE8BJyG1No_oVuSD_lY4g
