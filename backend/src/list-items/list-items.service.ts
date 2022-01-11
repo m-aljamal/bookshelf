@@ -1,3 +1,4 @@
+import { UpdateListItemDto } from './dto/update.dto';
 import { ListItems } from 'src/list-items/entity/list-items.entity';
 import { ListItemsDto } from './dto/list-items.dto';
 import { Injectable, BadRequestException } from '@nestjs/common';
@@ -35,5 +36,27 @@ export class ListItemsService {
       where: { user: { id: userId } },
       relations: ['book', 'user'],
     });
+  }
+
+  async deleteListItem(id: number, user: User) {
+    const listItem = await this.repository.findOne({
+      where: { id, user },
+    });
+    if (!listItem) {
+      throw new BadRequestException('List item does not exist');
+    }
+    return this.repository.delete(id);
+  }
+
+  async updateListItem(id: number, body: UpdateListItemDto, user: User) {
+    const listItem = await this.repository.findOne({
+      where: { id, user },
+    });
+    if (!listItem) {
+      throw new BadRequestException('List item does not exist');
+    }
+
+    const updatedListItem = this.repository.merge(listItem, body);
+    return this.repository.save(updatedListItem);
   }
 }

@@ -3,6 +3,7 @@ import { BookDto } from './dto/book.dto';
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -36,5 +37,10 @@ export class BooksController {
   @Post('/seed')
   seedBooks() {
     return this.booksService.seedBooks();
+  }
+
+  @Delete('/:id')
+  deleteBook(@Param('id') id: string) {
+    return this.booksService.deleteBook(+id);
   }
 }

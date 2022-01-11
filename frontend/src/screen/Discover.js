@@ -25,7 +25,6 @@ const DiscoverBookScreen = () => {
     setQuery(e.target.elements.search.value);
   };
 
-  console.log(data);
   return (
     <div className=" max-w-[800px] m-auto w-[90vw] py-[40px] px-0">
       <form onSubmit={handleSubmit}>

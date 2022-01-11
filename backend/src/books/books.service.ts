@@ -32,4 +32,7 @@ export class BooksService {
     });
     return Promise.all(books);
   }
+  deleteBook(id: number) {
+    return this.repository.delete(id);
+  }
 }

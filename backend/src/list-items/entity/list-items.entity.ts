@@ -23,6 +23,9 @@ export class ListItems {
   @CreateDateColumn()
   createdAt: Date;
 
+  @Column({ nullable: true })
+  finishDate: Date;
+
   @ManyToOne(() => User, (user) => user.listItems)
   user: User;
 

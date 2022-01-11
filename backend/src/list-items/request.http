@@ -1,11 +1,11 @@
 ### 
 POST http://localhost:3001/list-items
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQxODI4MDEzLCJleHAiOjE2NDE5MTQ0MTN9.b5HdscTZdstAlg0kDgNHaZPE8BJyG1No_oVuSD_lY4g
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQxOTI2NTYzLCJleHAiOjE2NDIwMTI5NjN9.L9m7iojmM_LXX7qbtqYRy3V01pjp3oP5RZabO7Cxd-8
 
 {
     
-    "bookId": 3
+    "bookId": 4
 }
 
 ###
@@ -14,3 +14,19 @@ GET http://localhost:3001/list-items
 ### 
 GET http://localhost:3001/list-items/user 
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQxODI4MDEzLCJleHAiOjE2NDE5MTQ0MTN9.b5HdscTZdstAlg0kDgNHaZPE8BJyG1No_oVuSD_lY4g
+
+
+### 
+DELETE  http://localhost:3001/list-items/7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQxOTI2NTYzLCJleHAiOjE2NDIwMTI5NjN9.L9m7iojmM_LXX7qbtqYRy3V01pjp3oP5RZabO7Cxd-8
+
+### 
+PUT  http://localhost:3001/list-items/15
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQxOTI2NTYzLCJleHAiOjE2NDIwMTI5NjN9.L9m7iojmM_LXX7qbtqYRy3V01pjp3oP5RZabO7Cxd-8
+
+{
+    "rating": 3,
+    "notes":"klkdfjldfdf",
+    "finishDate": "2019-12-12"
+}

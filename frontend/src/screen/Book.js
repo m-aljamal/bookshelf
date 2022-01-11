@@ -1,3 +1,4 @@
+import { StatusButtons } from "components/Status-buttons";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useBook } from "utils/books";
@@ -48,6 +49,7 @@ const Book = () => {
         <div className="mt-2">
           <em className="text-blue-800">by: {author}</em>
         </div>
+        {book.loadingBook ? null : <StatusButtons book={book} />}
       </div>
     </div>
   );

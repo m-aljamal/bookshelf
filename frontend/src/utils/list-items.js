@@ -6,7 +6,7 @@ function useListItems(user) {
   const { data: listItems } = useQuery({
     queryKey: "list-items",
     queryFn: () =>
-      client("list-items", { token: user.token }).then(
+      client("list-items/user", { token: user.token }).then(
         (listItems) => listItems
       ),
     config: {
@@ -24,7 +24,7 @@ function useListItem(bookId) {
   const { user } = useAuth();
 
   const listItems = useListItems(user);
-  return listItems.find((listItem) => listItem.bookId === bookId) ?? null;
+  return listItems.find((listItem) => listItem.book.id === bookId) ?? null;
 }
 
 const defaultMutationOptions = {

@@ -1,10 +1,15 @@
-import { IsNumber, IsString } from 'class-validator';
+import { IsDate, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class ListItemsDto {
-  rating: number;
+  @IsNumber()
+  rating: number = 0;
 
   @IsNumber()
   bookId: number;
 
-  notes: string;
+  @IsString()
+  notes: string = '';
+
+  @IsOptional()
+  finishDate: Date;
 }
