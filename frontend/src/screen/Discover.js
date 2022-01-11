@@ -4,7 +4,7 @@ import { Spinner } from "components/lib";
 import { FaSearch } from "react-icons/fa";
 import { useAsync } from "utils/hook";
 import { Link } from "react-router-dom";
-import { StatusButtons } from "./Status-buttons";
+import { StatusButtons } from "../components/Status-buttons";
 import { useAuth } from "context/auth-context";
 
 const DiscoverBookScreen = () => {
@@ -12,7 +12,6 @@ const DiscoverBookScreen = () => {
   const { user } = useAuth();
   const [query, setQuery] = useState("");
   const [queried, setQueried] = useState(false);
-
   useEffect(() => {
     if (!queried) return;
 
@@ -26,6 +25,7 @@ const DiscoverBookScreen = () => {
     setQuery(e.target.elements.search.value);
   };
 
+  console.log(data);
   return (
     <div className=" max-w-[800px] m-auto w-[90vw] py-[40px] px-0">
       <form onSubmit={handleSubmit}>
@@ -58,8 +58,19 @@ const DiscoverBookScreen = () => {
                   key={book.id}
                   className=" bg-gray-100 my-5 p-2 rounded-sm hover:bg-gray-200 "
                 >
-                  <p>{book.title}</p>
-                  <StatusButtons book={book} />
+                  <div className="flex gap-4">
+                    <div>
+                      <img src={book.coverImageUrl} />
+                    </div>
+                    <div>
+                      <div className="flex justify-between">
+                        <p className=" text-blue-800">{book.title}</p>
+                        <em>{book.author}</em>
+                      </div>
+                      <p>{book.synopsis}</p>
+                    </div>
+                    <StatusButtons book={book} />
+                  </div>
                 </div>
               </Link>
             ))}

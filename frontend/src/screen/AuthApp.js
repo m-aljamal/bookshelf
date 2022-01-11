@@ -1,7 +1,7 @@
 import React from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Link, Route, Routes, useMatch } from "react-router-dom";
-import DiscoverBookScreen from "components/Discover";
+import DiscoverBookScreen from "screen/Discover";
 import { FullPageErrorFallback } from "../components/lib";
 import { useAuth } from "context/auth-context";
 import Book from "./Book";
