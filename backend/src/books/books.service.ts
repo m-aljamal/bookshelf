@@ -17,7 +17,7 @@ export class BooksService {
   getBooks(query: string) {
     return this.repository
       .createQueryBuilder('book')
-      .where('book.title like :query', { query: `%${query}%` })
+      .where('LOWER(book.title) like :query', { query: `%${query}%` })
       .getMany();
   }
 

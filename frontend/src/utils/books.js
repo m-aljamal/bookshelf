@@ -33,6 +33,7 @@ const getBookSerchConfig = (query, user) => ({
 
 function useBookSearch(query, user) {
   const result = useQuery(getBookSerchConfig(query, user));
+
   return { ...result, books: result.data ?? loadingBooks };
 }
 

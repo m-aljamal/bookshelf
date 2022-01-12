@@ -13,8 +13,7 @@ Content-Type: application/json
   }
 
 ### 
-GET http://localhost:3001/books?query=the
-
+GET http://localhost:3001/books?query=voice
 
 ### 
 GET http://localhost:3001/books/4

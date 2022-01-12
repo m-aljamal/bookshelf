@@ -6,17 +6,20 @@ import { useAsync } from "utils/hook";
 import { Link } from "react-router-dom";
 import { StatusButtons } from "../components/Status-buttons";
 import { useAuth } from "context/auth-context";
+import BookRow from "components/BookRow";
+import { refetchBookSearchQuery, useBookSearch } from "utils/books";
 
 const DiscoverBookScreen = () => {
-  const { data, error, run, isLoading, isError, isSuccess } = useAsync();
   const { user } = useAuth();
   const [query, setQuery] = useState("");
   const [queried, setQueried] = useState(false);
+  const { books, error, isLoading, isError, isSuccess } = useBookSearch(
+    query,
+    user
+  );
   useEffect(() => {
-    if (!queried) return;
-
-    run(client(`books?query=${encodeURIComponent(query)}`));
-  }, [query, queried, run]);
+    return () => refetchBookSearchQuery(user);
+  }, [user]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,30 +51,31 @@ const DiscoverBookScreen = () => {
         </div>
       ) : null}
 
+      <div>
+        {queried ? null : (
+          <div>
+            <p>Welcome to the discover page.</p>
+            <p>Here, let me load a few books for you...</p>
+            {isLoading ? (
+              <Spinner />
+            ) : isSuccess && books.length ? (
+              <p>Here you go! Find more books with the search bar above.</p>
+            ) : isSuccess && !books.length ? (
+              <p>
+                Hmmm... I couldn't find any books to suggest for you. Sorry.
+              </p>
+            ) : null}
+          </div>
+        )}
+      </div>
+
       {isSuccess ? (
-        data.length ? (
+        books.length ? (
           <div className=" mt-2">
-            {data.map((book) => (
-              <Link to={`/book/${book.id}`} key={book.id}>
-                <div
-                  key={book.id}
-                  className=" bg-gray-100 my-5 p-2 rounded-sm hover:bg-gray-200 "
-                >
-                  <div className="flex gap-4">
-                    <div>
-                      <img src={book.coverImageUrl} />
-                    </div>
-                    <div>
-                      <div className="flex justify-between">
-                        <p className=" text-blue-800">{book.title}</p>
-                        <em>{book.author}</em>
-                      </div>
-                      <p>{book.synopsis}</p>
-                    </div>
-                    <StatusButtons book={book} />
-                  </div>
-                </div>
-              </Link>
+            {books.map((book) => (
+              <div key={book.id} aria-label={book.title}>
+                <BookRow book={book} />
+              </div>
             ))}
           </div>
         ) : (

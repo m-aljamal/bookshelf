@@ -6,6 +6,8 @@ import { FullPageErrorFallback } from "../components/lib";
 import { useAuth } from "context/auth-context";
 import Book from "./Book";
 import NotFound from "./NotFound";
+import FinishedBooks from "./FinishedBooks";
+import ReadingList from "./ReadingList";
 
 const AuthApp = () => {
   const { user, logout } = useAuth();
@@ -48,6 +50,8 @@ function Nav() {
     <nav className=" sticky top-4 p-1 border border-gray-300 rounded-md">
       <ul>
         <li>
+          <NavLink to="/reading-list">Reading List</NavLink>
+          <NavLink to="/finished-books">Finished Books</NavLink>
           <NavLink to="/discover">Discover</NavLink>
         </li>
       </ul>
@@ -60,6 +64,9 @@ function AppRoutes() {
     <Routes>
       <Route path="/discover" element={<DiscoverBookScreen />} />
       <Route path="/book/:bookId" element={<Book />} />
+      <Route path="/finished-books" element={<FinishedBooks />} />
+      <Route path="/reading-list" element={<ReadingList />} />
+
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
