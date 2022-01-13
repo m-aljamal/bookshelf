@@ -24,6 +24,7 @@ function useListItem(bookId) {
   const { user } = useAuth();
 
   const listItems = useListItems(user);
+
   return listItems.find((listItem) => listItem.book.id === bookId) ?? null;
 }
 

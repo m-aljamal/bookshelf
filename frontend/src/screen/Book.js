@@ -7,6 +7,7 @@ import bookPlaceholderSvg from "../assets/book-placeholder.svg";
 import { useAuth } from "../context/auth-context";
 import { client } from "../utils/api-client";
 import { useAsync } from "../utils/hook";
+import Rating from "components/Rating";
 const lodaingBook = {
   title: "Loading...",
   author: "Loading...",
@@ -20,7 +21,9 @@ const Book = () => {
   const { bookId } = useParams();
   const { user } = useAuth();
   const book = useBook(bookId, user);
-  const listItem = useListItem(bookId);
+
+  const listItem = useListItem(+bookId);
+
   // const { data, run, error, isError } = useAsync();
 
   // useEffect(() => {
@@ -44,12 +47,19 @@ const Book = () => {
           <h1 className="my-10 text-green-800">{title}</h1>
           <img src={coverImageUrl} />
         </div>
+        <div className=" mt-5">
+          {listItem ? (
+            <p className=" text-red-500">
+              <Rating listItem={listItem} />
+            </p>
+          ) : null}
+        </div>
         <br />
         <p>{synopsis}</p>
         <div className="mt-2">
           <em className="text-blue-800">by: {author}</em>
         </div>
-        {book.loadingBook ? null : <StatusButtons book={book} />}
+        <div>{book.loadingBook ? null : <StatusButtons book={book} />}</div>
       </div>
     </div>
   );
