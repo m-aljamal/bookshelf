@@ -2,12 +2,13 @@ import { StatusButtons } from "components/Status-buttons";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useBook } from "utils/books";
-import { useListItem } from "utils/list-items";
+import { useListItem, useUpdateListItem } from "utils/list-items";
 import bookPlaceholderSvg from "../assets/book-placeholder.svg";
 import { useAuth } from "../context/auth-context";
 import { client } from "../utils/api-client";
 import { useAsync } from "../utils/hook";
 import Rating from "components/Rating";
+import debounceFn from "debounce-fn";
 const lodaingBook = {
   title: "Loading...",
   author: "Loading...",
@@ -21,7 +22,7 @@ const Book = () => {
   const { bookId } = useParams();
   const { user } = useAuth();
   const book = useBook(bookId, user);
-
+  console.log(book);
   const listItem = useListItem(+bookId);
 
   // const { data, run, error, isError } = useAsync();
@@ -66,3 +67,19 @@ const Book = () => {
 };
 
 export default Book;
+
+function NotesTextarea({ listItem }) {
+  const { user } = useAuth();
+  const [mutate, { error, isError, isLoading }] = useUpdateListItem(user);
+  const debouncedMutate = useMemo(
+    () => debounceFn(mutate, { wait: 300 }),
+    [mutate]
+  );
+
+  function handleNotesChange(e) {
+    debouncedMutate({
+      id: listItem.id,
+      notes: e.target.value,
+    });
+  }
+}
