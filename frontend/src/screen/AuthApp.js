@@ -9,6 +9,19 @@ import NotFound from "./NotFound";
 import FinishedBooks from "./FinishedBooks";
 import ReadingList from "./ReadingList";
 
+function ErrorFallback({ error }) {
+  return (
+    <div className=" p-4  ">
+      <h1>Something went wrong!</h1>
+      <p>
+        {error.message}
+        <br />
+        {error.stack}
+      </p>
+    </div>
+  );
+}
+
 const AuthApp = () => {
   const { user, logout } = useAuth();
   return (
@@ -24,7 +37,7 @@ const AuthApp = () => {
           <Nav />
         </div>
         <main className=" w-full">
-          <ErrorBoundary FallbackComponent={FullPageErrorFallback}>
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
             <AppRoutes />
           </ErrorBoundary>
         </main>

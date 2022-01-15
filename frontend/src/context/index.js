@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProvider } from "./auth-context";
 
 function AppProviders({ children }) {
+  
   const queryConfig = {
     queries: {
       useErrorBoundary: true,
