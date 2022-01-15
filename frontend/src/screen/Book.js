@@ -1,5 +1,5 @@
 import { StatusButtons } from "components/Status-buttons";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useBook } from "utils/books";
 import { useListItem, useUpdateListItem } from "utils/list-items";
@@ -9,6 +9,7 @@ import { client } from "../utils/api-client";
 import { useAsync } from "../utils/hook";
 import Rating from "components/Rating";
 import debounceFn from "debounce-fn";
+import { Spinner } from "components/lib";
 const lodaingBook = {
   title: "Loading...",
   author: "Loading...",
@@ -62,14 +63,16 @@ const Book = () => {
         </div>
         <div>{book.loadingBook ? null : <StatusButtons book={book} />}</div>
       </div>
+      {!book.loadingBook && listItem ? (
+        <NotesTextarea listItem={listItem} user={user} />
+      ) : null}
     </div>
   );
 };
 
 export default Book;
 
-function NotesTextarea({ listItem }) {
-  const { user } = useAuth();
+function NotesTextarea({ listItem, user }) {
   const [mutate, { error, isError, isLoading }] = useUpdateListItem(user);
   const debouncedMutate = useMemo(
     () => debounceFn(mutate, { wait: 300 }),
@@ -82,4 +85,19 @@ function NotesTextarea({ listItem }) {
       notes: e.target.value,
     });
   }
+  return (
+    <>
+      <div>
+        <label>Notes</label>
+        {isError ? <p>There is a problem</p> : null}
+        {isLoading ? <Spinner /> : null}
+        <textarea
+          id="notes"
+          defaultValue={listItem.notes}
+          onChange={handleNotesChange}
+          className="w-full min-h-[300px] border "
+        />
+      </div>
+    </>
+  );
 }
