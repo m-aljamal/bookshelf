@@ -10,37 +10,15 @@ import { useAsync } from "../utils/hook";
 import Rating from "components/Rating";
 import debounceFn from "debounce-fn";
 import { Spinner } from "components/lib";
-const lodaingBook = {
-  title: "Loading...",
-  author: "Loading...",
-  coverImageUrl: bookPlaceholderSvg,
-  publisher: "Loading...",
-  synopsis: "Loading...",
-  loadingBook: true,
-};
 
 const Book = () => {
   const { bookId } = useParams();
-  const { user } = useAuth();
-  const book = useBook(bookId, user);
-  console.log(book);
+
+  const book = useBook(bookId);
+
   const listItem = useListItem(+bookId);
 
-  // const { data, run, error, isError } = useAsync();
-
-  // useEffect(() => {
-  //   run(client(`books/${bookId}`, { token: user.token }));
-  // }, [run, bookId, user]);
-
   const { title, author, coverImageUrl, publisher, synopsis } = book;
-
-  // if (isError) {
-  //   return (
-  //     <div>
-  //       <p>There is a problem</p>
-  //     </div>
-  //   );
-  // }
 
   return (
     <div>
@@ -64,7 +42,7 @@ const Book = () => {
         <div>{book.loadingBook ? null : <StatusButtons book={book} />}</div>
       </div>
       {!book.loadingBook && listItem ? (
-        <NotesTextarea listItem={listItem} user={user} />
+        <NotesTextarea listItem={listItem} />
       ) : null}
     </div>
   );
@@ -72,8 +50,8 @@ const Book = () => {
 
 export default Book;
 
-function NotesTextarea({ listItem, user }) {
-  const [mutate, { error, isError, isLoading }] = useUpdateListItem(user);
+function NotesTextarea({ listItem }) {
+  const [mutate, { error, isError, isLoading }] = useUpdateListItem();
   const debouncedMutate = useMemo(
     () => debounceFn(mutate, { wait: 300 }),
     [mutate]

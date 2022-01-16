@@ -7,19 +7,22 @@ import { Link } from "react-router-dom";
 import { StatusButtons } from "../components/Status-buttons";
 import { useAuth } from "context/auth-context";
 import BookRow from "components/BookRow";
-import { refetchBookSearchQuery, useBookSearch } from "utils/books";
+import { useRefetchBookSearchQuery, useBookSearch } from "utils/books";
 
 const DiscoverBookScreen = () => {
   const { user } = useAuth();
   const [query, setQuery] = useState("");
   const [queried, setQueried] = useState(false);
-  const { books, error, isLoading, isError, isSuccess } = useBookSearch(
-    query,
-    user
-  );
+  const { books, error, status } = useBookSearch(query);
+  const refetchBookSearchQuery = useRefetchBookSearchQuery();
+
   useEffect(() => {
-    return () => refetchBookSearchQuery(user);
-  }, [user]);
+    return () => refetchBookSearchQuery();
+  }, [refetchBookSearchQuery]);
+
+  const isLoading = status === "loading";
+  const isSuccess = status === "success";
+  const isError = status === "error";
 
   const handleSubmit = (e) => {
     e.preventDefault();
