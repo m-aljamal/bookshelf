@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { client } from "utils/api-client";
+
 import { Spinner } from "components/lib";
 import { FaSearch } from "react-icons/fa";
-import { useAsync } from "utils/hook";
-import { Link } from "react-router-dom";
-import { StatusButtons } from "../components/Status-buttons";
-import { useAuth } from "context/auth-context";
+
 import BookRow from "components/BookRow";
 import { useRefetchBookSearchQuery, useBookSearch } from "utils/books";
 
 const DiscoverBookScreen = () => {
-  const { user } = useAuth();
   const [query, setQuery] = useState("");
   const [queried, setQueried] = useState(false);
   const { books, error, status } = useBookSearch(query);
@@ -30,7 +26,7 @@ const DiscoverBookScreen = () => {
 
     setQuery(e.target.elements.search.value);
   };
-
+ 
   return (
     <div className=" max-w-[800px] m-auto w-[90vw] py-[40px] px-0">
       <form onSubmit={handleSubmit}>

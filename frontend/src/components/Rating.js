@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import { FaStar } from "react-icons/fa";
 import { useUpdateListItem } from "utils/list-items";
-import { useAuth } from "context/auth-context";
 const Rating = ({ listItem }) => {
-  const { user } = useAuth();
+
   const [isTabbing, setIsTabbing] = React.useState(false);
-  const [update, { error, isError }] = useUpdateListItem(user);
+  const [update, { error, isError }] = useUpdateListItem();
 
   useEffect(() => {
     function handleKeyDown(e) {

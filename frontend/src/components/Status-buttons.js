@@ -7,7 +7,6 @@ import {
   FaTimesCircle,
 } from "react-icons/fa";
 import Tooltip from "@reach/tooltip";
-import { useAuth } from "context/auth-context";
 
 import { useAsync } from "utils/hook";
 import { Spinner } from "./lib";
@@ -48,12 +47,11 @@ function TooltipButton({ label, highlight, onClick, icon, ...rest }) {
 }
 
 function StatusButtons({ book }) {
-  const { user } = useAuth();
   const listItem = useListItem(book.id);
 
-  const [update] = useUpdateListItem(user, { throwOnError: true });
-  const [remove] = useRemoveListItem(user, { throwOnError: true });
-  const [create] = useCreateListItem(user, { throwOnError: true });
+  const [update] = useUpdateListItem({ throwOnError: true });
+  const [remove] = useRemoveListItem({ throwOnError: true });
+  const [create] = useCreateListItem({ throwOnError: true });
 
   return (
     <React.Fragment>

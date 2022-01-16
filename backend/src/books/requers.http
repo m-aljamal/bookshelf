@@ -13,8 +13,8 @@ Content-Type: application/json
   }
 
 ### 
-GET http://localhost:3001/books?query=voice
-
+GET http://localhost:3001/books?query=
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQyMzIxNjUwLCJleHAiOjE2NDI0MDgwNTB9.4sxcUuYwp6wE0kChPHvGcN7lS_IYSK70obqKEbY_Qp4
 ### 
 GET http://localhost:3001/books/4
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQxMzEzMTI2LCJleHAiOjE2NDEzOTk1MjZ9.lgxhaiRr16xcz93WTaJxd4ujvbdP1C103GX3hECmdo0

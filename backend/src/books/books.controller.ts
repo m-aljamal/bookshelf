@@ -29,9 +29,10 @@ export class BooksController {
     return this.booksService.getBook(+id);
   }
 
+  @UseGuards(AuthGuard())
   @Get()
-  getbooks(@Query('query') query: string) {
-    return this.booksService.getBooks(query);
+  getbooks(@Query('query') query: string, @CurrentUser() user: User) {
+    return this.booksService.getBooks(query, user);
   }
 
   @Post('/seed')

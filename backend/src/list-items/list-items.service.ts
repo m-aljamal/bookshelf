@@ -1,7 +1,12 @@
 import { UpdateListItemDto } from './dto/update.dto';
 import { ListItems } from 'src/list-items/entity/list-items.entity';
 import { ListItemsDto } from './dto/list-items.dto';
-import { Injectable, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  BadRequestException,
+  Inject,
+  forwardRef,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -12,6 +17,7 @@ import { BooksService } from 'src/books/books.service';
 export class ListItemsService {
   constructor(
     @InjectRepository(ListItems) private repository: Repository<ListItems>,
+
     private readonly bookService: BooksService,
   ) {}
 
@@ -30,6 +36,8 @@ export class ListItemsService {
   async getAllListItems() {
     return this.repository.find({ relations: ['book', 'user'] });
   }
+
+ 
 
   async getUserListItems(userId: number) {
     return this.repository.find({
