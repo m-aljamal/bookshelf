@@ -1,12 +1,9 @@
 import ListItemList from "components/ListItemList";
 import React from "react";
-import { useAuth } from "context/auth-context";
 import { Link } from "react-router-dom";
 const FinishedBooks = () => {
-  const { user } = useAuth();
   return (
     <ListItemList
-      user={user}
       filterListItem={(li) => Boolean(li.finishDate)}
       noListItem={
         <p>

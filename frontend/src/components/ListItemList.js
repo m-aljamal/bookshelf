@@ -1,15 +1,10 @@
 import React from "react";
 import { useListItems } from "utils/list-items";
 import BookRow from "./BookRow";
-const ListItemList = ({
-  user,
-  filterListItem,
-  noListItem,
-  noFilterListItem,
-}) => {
-  const listItems = useListItems(user);
+const ListItemList = ({ filterListItem, noListItem, noFilterListItem }) => {
+  const listItems = useListItems();
   const filterListItems = listItems.filter(filterListItem);
-  console.log(listItems);
+
   if (!listItems.length) {
     return <div>{noListItem}</div>;
   }
